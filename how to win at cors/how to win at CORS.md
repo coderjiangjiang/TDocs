@@ -454,4 +454,6 @@ Access-Control-Allow-Methods: Wibbley-Wobbley, WIBBLEY-WOBBLEY
 
 非常感谢Anne van Kesteren、Simon Pieters、Thomas Steiner、Ethan、Mathias Bynens、Jeff Posnick和Matt Hobbs校对、以及对细节完善的帮助。
 
-[在GitHub上查看](https://github.com/jakearchibald/jakearchibald.com/blob/main/static-build/posts/2021/10/cors/index.md)
+[原文地址](https://jakearchibald.com/2021/cors/)
+
+[原文在GitHub上查看](https://github.com/jakearchibald/jakearchibald.com/blob/main/static-build/posts/2021/10/cors/index.md)
