@@ -1,3 +1,21 @@
+# 如何阅读 ECMAScript 规范
+
+在线版，2020-3-28
+
+**当前版本**：[https://timothygu.me/es-howto/](https://timothygu.me/es-howto/)
+
+**问题跟踪**：  
+    [GitHub](https://github.com/TimothyGu/es-howto/issues/)  
+    [本文中提供的issues地址](https://timothygu.me/es-howto/#issues-index)
+
+**作者**：[Timothy Gu](https://timothygu.me/) [timothygu99@gmail.com](timothygu99@gmail.com)
+
+## 提要
+
+如果你想学习JavaScript复杂的工作原理的话，那么ECMAScript语言规范(又名JavaScript规范，或ECMA-262)是一个非常好的资源文献。然而，当你刚开始看到那巨量的文字篇幅时，你可能会望而却步。而本文编写的目的就是为了让你以一种更简单的方式去阅读这本最佳的JavaScript语言参考规范。
+
+## 目录
+
 <!-- vscode-markdown-toc -->
 *  [[§] 1. 序](#1.)
 	* [[§] 1.1. 为什么需要阅读ECMAScript规范](#1.1.ECMAScript)
@@ -30,23 +48,6 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-# 如何阅读 ECMAScript 规范
-
-在线版，2020-3-28
-
-**当前版本**：[https://timothygu.me/es-howto/](https://timothygu.me/es-howto/)
-
-**问题跟踪**：  
-    [GitHub](https://github.com/TimothyGu/es-howto/issues/)  
-    [本文中提供的issues地址](https://timothygu.me/es-howto/#issues-index)
-
-**作者**：[Timothy Gu](https://timothygu.me/) [timothygu99@gmail.com](timothygu99@gmail.com)
-
-## 提要
-
-如果你想学习JavaScript复杂的工作原理的话，那么ECMAScript语言规范(又名JavaScript规范，或ECMA-262)是一个非常好的资源文献。然而，当你刚开始看到那巨量的文字篇幅时，你可能会望而却步。而本文编写的目的就是为了让你以一种更简单的方式去阅读这本最佳的JavaScript语言参考规范。
-
-
 
 ## <a name='1.'></a>[§] 1. 序
 
@@ -134,7 +135,7 @@ OK，现在你知道了，规范是非常有用的工具，而且可以帮助你
 >
 >[5] 这些都是仅针对浏览器的内容。
 
-###  2.3. <a name='1.3.ECMAScript'></a>§ 1.3. 在进一步讨论之前，ECMAScript规范在哪里?  
+### <a name='1.3.ECMAScript'></a>§ 1.3. 在进一步讨论之前，ECMAScript规范在哪里?  
 
 当你[google“ECMAScript规范”](https://www.google.com/search?q=ecmascript+specification)时，你会搜索到非常多的结果，它们看起来都是正规合法的规范。那你应该选择哪一个呢?  
 
@@ -150,7 +151,7 @@ ECMAScript语言规范是由一群来自不同背景的人开发的，他们被�
 
 >注:ISO/IEC还将ECMAScript语言标准重新发布为ISO/IEC 22275 [[ISO-22275-2018]](https://timothygu.me/es-howto/#biblio-iso-22275-2018)。不过不用担心，因为该标准基本上是一个到[[ECMA-262]](https://timothygu.me/es-howto/#biblio-ecma-262)的超链接。  
 
-###  2.4. <a name='1.4.'></a>§ 1.4. 规范导航  
+### <a name='1.4.'></a>§ 1.4. 规范导航  
 
 ECMAScript规范谈论了**非常多**的东西。即使它的作者尽力把它分成有逻辑的块，但仍然还有巨大的文本阅读量。  
 
@@ -179,13 +180,13 @@ ECMAScript规范谈论了**非常多**的东西。即使它的作者尽力把它
 
 我想说的是，绝对没有人会从头到尾地阅读规范。相反，我们只需要查看与我们试图寻找的内容相对应的部分，并在该部分中查看我们需要的内容。试着确定你的问题与五大部分中的哪一个相关;如果你无法确定是哪一个，问你自己这个问题“这是在什么时候运算的(无论你想确定什么)?”这样可能会更有帮助。不要太担心，通过练习，使用规范会变得更容易。  
 
-##  3. <a name='2.'></a>§ 2. 运行时语义  
+## <a name='2.'></a>§ 2. 运行时语义  
 
 语言运行时语义和APIs是规范中最大的部分，通常也是我们最关心的部分。  
 
 总的来说，阅读这些部分是非常简单的。但是，该规范使用了许多的简写对刚开始使用的人来说是非常棘手的(至少对我来说)。下面我将尝试解释其中的一些约定，然后将它们应用到一个常规的工作流中，来弄清楚这些是如何工作的。  
 
-###  3.1. <a name='2.1.'></a>§ 2.1. 算法步骤  
+### <a name='2.1.'></a>§ 2.1. 算法步骤  
 
 ECMAScript中的大多数运行时语义都是由一系列算法步骤指定的，这与伪代码没什么不同，但形式要精确得多。  
 
@@ -202,7 +203,7 @@ ECMAScript中的大多数运行时语义都是由一系列算法步骤指定的�
 
 >延伸阅读: [§5.2 算法的约定](https://tc39.es/ecma262/#sec-algorithm-conventions)
 
-###  3.2. <a name='2.2.'></a>§ 2.2. 抽象操作
+### <a name='2.2.'></a>§ 2.2. 抽象操作
 
 有时你会在规范中看到某些像是函数调用的东西。比如Boolean()函数的第一步是:  
 
@@ -229,7 +230,7 @@ ECMAScript规范使用`Record`这个术语来指代具有一组固定键的键�
 
 >例2:
 >
->值得注意的是，[属性描述符](https://tc39.es/ecma262/#sec-property-descriptor-specification-type)`[[Value]]`， `[[Writable]]`， `[[Get]]`， `[[Set]]`， `[[Enumerable]]`和`[[Configurable]]`这些字段都是基于[Record](https://timothygu.me/es-howto/#record)实现。[抽象操作](https://timothygu.me/es-howto/#abstract-operation) [IsDataDescriptor](https://tc39.es/ecma262/#sec-isdatadescriptor) 广泛使用这种表示法:  
+>值得注意的是，[属性描述符](https://tc39.es/ecma262/#sec-property-descriptor-specification-type)`[[Value]]`， `[[Writable]]`， `[[Get]]`， `[[Set]]`， `[[Enumerable]]`和`[[Configurable]]`这些字段都是基于[Record](https://timothygu.me/es-howto/#record)实现。[抽象操作](#-22-抽象操作) [IsDataDescriptor](https://tc39.es/ecma262/#sec-isdatadescriptor) 广泛使用这种表示法:  
 >
 >当使用[属性描述符](https://tc39.es/ecma262/#sec-property-descriptor-specification-type) *Desc* 调用抽象操作IsDataDescriptor 时，需要执行以下步骤:  
 >
