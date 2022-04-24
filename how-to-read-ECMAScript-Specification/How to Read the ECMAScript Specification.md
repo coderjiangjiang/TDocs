@@ -48,13 +48,13 @@
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
-## <a name='1.'></a>[§] 1. 序
+## [[§] 1. 序](#1.)
 
 ECMAScript规范每天阅读一点点，健康快乐多一点！阅读规范也许这是你的新年愿望，亦或是某个医生开的处方（开个玩笑😂）。总之，不管出于什么原因，欢迎欢迎!
 
 > **注:** 在本文中，我将使用术语“ECMAScript”来指代规范本身，而在其他地方使用“JavaScript”。然而，总体上这两个术语指的是同一件事。(ECMAScript和JavaScript之间有一些历史上的区别，但这超出了本文的讨论范围，你可以[google一下轻松了解这些区别](https://www.google.com/search?q=ecmascript+vs.+javascript)。)  
 
-### <a name='1.1.ECMAScript'></a>[§] 1.1. 为什么需要阅读ECMAScript规范  
+### [[§] 1.1. 为什么需要阅读ECMAScript规范](#1.1.ECMAScript)  
 
 ECMAScript规范是所有JavaScript实现的权威参考资料。无论JavaScript是运行在你的浏览器[[什么是我的浏览器]](https://timothygu.me/es-howto/#biblio-whatismybrowser)，还是在你的Node.js服务器上 [[NODEJS]](https://timothygu.me/es-howto/#biblio-nodejs)，亦或是在你的物联网设备上[[JOHNNY-FIVE]](https://timothygu.me/es-howto/#biblio-johnny-five)，都要遵循ECMAScript规范。所有JavaScript引擎的开发人员也都依赖于该规范进行开发，以确保他们的新特性能够像其他JavaScript引擎一样按照预期的方式工作。  
 但我认为该规范不仅仅对“JavaScript引擎开发人员”这种大神有用，实际上它对普通的JavaScript程序员同样非常有用，只是你还没有意识到而已。
