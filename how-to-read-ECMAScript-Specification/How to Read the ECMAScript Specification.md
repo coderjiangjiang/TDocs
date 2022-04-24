@@ -34,13 +34,12 @@
 	* [§ 2.6. 示例: String.prototype.substring()](#2.6.String.prototype.substring)
 	* [§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?](#2.7.BooleanString)
 	* [§ 2.8. 示例: `typeof` 运算符](#2.8.typeof)
-* [§ 术语表](#-1)
-	* [§ 常见的抽象操作](#-1)
-* [§ 术语索引](#-1)
-	* [§  规范定义的术语](#-1)
-	* [§  引用术语](#-1)
-* [§ 参考](#-1)
-	* [§ 参考文献](#-1)
+* [§ 术语表](#3.)
+	* [§ 常见的抽象操作](#3.1.)
+* [§ 术语索引](#4.)
+	* [§  规范定义的术语](#4.1.)
+* [§ 参考](#5.)
+	* [§ 参考文献](#5.1)
 * [§ ISSUS](#ISSUS)
 
 <!-- vscode-markdown-toc-config
@@ -214,17 +213,17 @@ ECMAScript中的大多数运行时语义都是由一系列算法步骤指定的�
 
 这个“ToBoolean”函数被称为一个 ***抽象操作*** 。之所以称它为抽象操作，是因为它实际上并没有真正的这么个函数公开暴露给JavaScript代码。它只是规范编写者发明的一种符号，只是为了让他们不用一遍又一遍地写同样的东西。
 
->注:现在，不要担心看不懂在ToBoolean之前的!。我们将在 [§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](https://timothygu.me/es-howto/#completion-records-and-shorthands) 中讨论它
+>注:现在，不要担心看不懂在ToBoolean之前的!。我们将在 [§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](#24-completion-records-及特殊符号--和-) 中讨论它
 
 >延伸阅读: [§5.2.1抽象操作](https://tc39.es/ecma262/#sec-algorithm-conventions-abstract-operations)
 
-###  3.3. <a name='2.3.This'></a>§ 2.3. `[[This]]` 是什么？
+### <a name='2.3.This'></a>§ 2.3. `[[This]]` 是什么？
 
 有时候，你可能会看到 ***`[[符号]]`*** 就像“把proto设置为obj.\[[Prototype]]”那样被使用。根据它出现的上下文，这个符号在技术上可以表示几种不同的东西，但你可能要花费很长时间才能理解，其实这个符号指的是某些无法通过JavaScript代码观察到的内部属性。  
 
 准确地说，它可以表示三种不同的东西，我将用规范中的示例来说明这一点。不过，现在可以跳过它们了。
 
-####  3.3.1. <a name='2.3.1.Record'></a>§ 2.3.1. Record 字段
+#### <a name='2.3.1.Record'></a>§ 2.3.1. Record 字段
 
 ECMAScript规范使用`Record`这个术语来指代具有一组固定键的键值映射——有点像c语言中的structure。`Record`的每个键值对称为一个字段。因为`Record`只能出现在规范中，而不能出现在实际的JavaScript代码中，所以使用 ***`[[符号]]`*** 引用[Record](https://timothygu.me/es-howto/#record)的[字段](https://timothygu.me/es-howto/#record-field)是有意义的。  
 
@@ -238,11 +237,11 @@ ECMAScript规范使用`Record`这个术语来指代具有一组固定键的键�
 > 2. 如果 *Desc*.\[[Value]] 与 *Desc*.\[[Writable]] 都不存在的话, 返回 **false**.
 > 3. 返回 **true**.
 
-在下一节中可以找到[Records](https://timothygu.me/es-howto/#record)的另一个具体例子，[§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](https://timothygu.me/es-howto/#completion-records-and-shorthands)  
+在下一节中可以找到[Records](https://timothygu.me/es-howto/#record)的另一个具体例子，[§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](#24-completion-records-及特殊符号--和-)  
 
 >延伸阅读: [§6.2.1 列表和 Record 规范类型](https://tc39.es/ecma262/#sec-list-and-record-specification-type)
 
-####  3.3.2. <a name='2.3.2.JavaScript'></a>§ 2.3.2. JavaScript对象的内部槽  
+#### <a name='2.3.2.JavaScript'></a>§ 2.3.2. JavaScript对象的内部槽  
 
 JavaScript对象可能会有一些所谓的[内部槽](https://timothygu.me/es-howto/#internal-slot)，而规范会使用这些槽来保存数据。像[Record字段](https://timothygu.me/es-howto/#record-field)那样，这些内部槽不能用JavaScript观察到，但可能其中的一些会通过特定的工具（如谷歌Chrome的DevTools）暴露出来。因此，使用[`[[符号]]`](https://timothygu.me/es-howto/#double-brackets-notation)来描述内部槽也是有意义的。  
 
@@ -250,7 +249,7 @@ JavaScript对象可能会有一些所谓的[内部槽](https://timothygu.me/es-h
 
 >例3:
 >
->大多数JavaScript对象都有 \[[Prototype]]这么一个内部槽，它引用了当前对象所继承的对象。这个内部槽的值通常也就是[Object.getPrototypeOf()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf#)方法返回的值。在[抽象操作](https://timothygu.me/es-howto/#abstract-operation) [OrdinaryGetPrototypeOf](https://tc39.es/ecma262/#sec-ordinarygetprototypeof)中，这个内部槽的值会被访问:  
+>大多数JavaScript对象都有 \[[Prototype]]这么一个内部槽，它引用了当前对象所继承的对象。这个内部槽的值通常也就是[Object.getPrototypeOf()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf#)方法返回的值。在[抽象操作](#-22-抽象操作) [OrdinaryGetPrototypeOf](https://tc39.es/ecma262/#sec-ordinarygetprototypeof)中，这个内部槽的值会被访问:  
 >
 >当对象O调用抽象操作 OrdinaryGetPrototypeOf 时，将执行以下步骤:
 >
@@ -258,7 +257,7 @@ JavaScript对象可能会有一些所谓的[内部槽](https://timothygu.me/es-h
 
 >注:对象的内部槽与[Record](https://timothygu.me/es-howto/#record-field)在外观上是相同的，但无论它是一个对象还是一个[Record](https://timothygu.me/es-howto/#record)，都可以通过查看这个表示法的实例主体(出现在'.'之前的部分)来消除歧义。从上下文环境来看通常是很容易区别的。
 
-####  3.3.3. <a name='2.3.3.JavaScript'></a>§ 2.3.3. JavaScript对象的内部方法  
+#### <a name='2.3.3.JavaScript'></a>§ 2.3.3. JavaScript对象的内部方法  
 
 JavaScript对象也有所谓的内部方法。像[内部槽](https://timothygu.me/es-howto/#internal-method)一样，这些[内部方法](https://timothygu.me/es-howto/#internal-method)不能通过JavaScript直接观察到。因此，使用[`[[符号]]`](https://timothygu.me/es-howto/#double-brackets-notation)来描述内部方法也是有意义的。  
 
@@ -266,7 +265,7 @@ JavaScript对象也有所谓的内部方法。像[内部槽](https://timothygu.m
 
 >例4:
 >
->所有JavaScript函数都有一个`[[Call]]`内部方法来运行该函数。这个[Call](https://tc39.es/ecma262/#sec-call)的[抽象操作](https://timothygu.me/es-howto/#abstract-operation)有以下步骤:  
+>所有JavaScript函数都有一个`[[Call]]`内部方法来运行该函数。这个[Call](https://tc39.es/ecma262/#sec-call)的[抽象操作](#-22-抽象操作)有以下步骤:  
 >
 > 1. `Return ? F.[[Call]](V, argumentsList).`  
 >
@@ -274,7 +273,7 @@ JavaScript对象也有所谓的内部方法。像[内部槽](https://timothygu.m
 
 >注意:[`[[符号]]`](https://timothygu.me/es-howto/#double-brackets-notation)的第三种含义与其他含义的区别在于，它看起来更像一个函数调用。
 
-###  3.4. <a name='2.4CompletionRecords'></a>§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`  
+### <a name='2.4CompletionRecords'></a>§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`  
 
 ECMAScript规范中的每个运行时语义都会显式或隐式地返回一个 ***Completion Record*** 结果。这个Completion Record可能拥有三种字段:  
 
@@ -282,7 +281,7 @@ ECMAScript规范中的每个运行时语义都会显式或隐式地返回一个 
 * 如果 `[[Type]]` 是 normal,return或 throw的话, 那么它可能还有个字段是 `[[Value]]` (返回或者抛出的值)
 * 如果 `[[Type]]` 是 break 或 continue的话, 当脚本执行break或continue作为运行时语义的结果时，它可以有选择地携带一个被称为`[[Target]]`的标签，
 
->注意:双括号用来表示 [Record](https://timothygu.me/es-howto/#record) [字段](https://timothygu.me/es-howto/#record-field)。关于“Record”及其相关的符号，请参见[§ 2.3.1 Record 字段](https://timothygu.me/es-howto/#double-brackets-field-of-record)。
+>注意:双括号用来表示 [Record](https://timothygu.me/es-howto/#record) [字段](https://timothygu.me/es-howto/#record-field)。关于“Record”及其相关的符号，请参见[§ 2.3.1 Record 字段](#-231-record-字段)。
 
 `[[Type]]`为normal的[Completion Record](https://timothygu.me/es-howto/#completion-record)被称为 ***normal completion*** 。除了normal completion之外，所有其他的Completion Record都被称为 ***abrupt completion*** 。
 
@@ -376,7 +375,7 @@ ECMAScript规范中的每个运行时语义都会显式或隐式地返回一个 
 
 >延伸阅读: [§5.2.3.4 ReturnIfAbrupt 简写](https://tc39.es/ecma262/#sec-completion-record-specification-type)
 
-###  3.5. <a name='2.5.JavaScriptObjects'></a>§ 2.5. JavaScript Objects
+### <a name='2.5.JavaScriptObjects'></a>§ 2.5. JavaScript Objects
 
 在ECMAScript中，一部分在讲每个对象都有的内部方法集，而规范的其余部分就是在讲通过调用这些方法来执行特定的任务。所有对象都有以下几个内部方法:
 
@@ -432,7 +431,7 @@ ECMAScript规范还允许其他规范定义它们自己的特殊对象。正是�
 
 JavaScript对象也可以通过定义 ***内部槽*** 来包含某些特定类型的值。我倾向于把[***内部槽***](https://timothygu.me/es-howto/#internal-slot)看作是Symbol命名的属性，它们隐藏在Object.getOwnPropertySymbols()中。普通对象和特殊对象都允许拥有[内部槽](https://timothygu.me/es-howto/#internal-slot)。
 
->在[§ 2.3.2 JavaScript对象的内部槽](https://timothygu.me/es-howto/#double-brackets-internal-slot-of-javascript-object)中，我提到了 ***大多数*** 对象都有一个叫做`[[Prototype]]`的内部槽(事实上，所有普通对象，甚至一些特殊对象(如Array对象)都有它)。但我在上面也曾简要地描述过有一个名为`[[GetPrototypeOf]]`的内部方法。它们有什么区别呢?
+>在[§ 2.3.2 JavaScript对象的内部槽](#-232-javascript对象的内部槽)中，我提到了 ***大多数*** 对象都有一个叫做`[[Prototype]]`的内部槽(事实上，所有普通对象，甚至一些特殊对象(如Array对象)都有它)。但我在上面也曾简要地描述过有一个名为`[[GetPrototypeOf]]`的内部方法。它们有什么区别呢?
 >
 >关键字是 ***“大多数”*** :区别在于大多数对象都有`[[Prototype]]`内部槽，而所有对象是都实现了`[[GetPrototypeOf]]`这个内部方法。值得注意的是，[Proxy](https://tc39.es/ecma262/#sec-proxy-objects)对象没有自己的`[[Prototype]]`，它的`[[GetPrototypeOf]]`内部方法要么遵从于已注册的处理程序，要么遵从于目标对象的原型，并且被存储在[Proxy](https://tc39.es/ecma262/#sec-proxy-objects)对象的`[[ProxyTarget]]`内部槽中。
 >出于这个原因，当在处理对象时，最好的办法是去参考合适的[内部方法](https://timothygu.me/es-howto/#internal-method)而不是直接查看[内部槽](https://timothygu.me/es-howto/#internal-slot)。
@@ -445,7 +444,7 @@ JavaScript对象也可以通过定义 ***内部槽*** 来包含某些特定类�
 
 ![这是图片](./img/object-uml.svg "Object UML")  
 
-###  3.6. <a name='2.6.String.prototype.substring'></a>§ 2.6. 示例: String.prototype.substring()  
+### <a name='2.6.String.prototype.substring'></a>§ 2.6. 示例: String.prototype.substring()  
 
 现在我们已经比较理解规范是如何组织和编写的了，那接下来让我们来练习一下!  
 假设我现在有一个问题:
@@ -470,9 +469,9 @@ JavaScript对象也可以通过定义 ***内部槽*** 来包含某些特定类�
 
 >1. 把 O 设置为 ? [RequireObjectCoercible](https://tc39.es/ecma262/#sec-requireobjectcoercible)(**this** value).
 
-这个`?`简写可以让我们得出结论:在某些情况下，[RequireObjectCoercible](https://tc39.es/ecma262/#sec-requireobjectcoercible)[抽象操作](https://timothygu.me/es-howto/#abstract-operation)可能会抛出异常，否则用`!`就可以了。如果它抛出一个错误，那么它将与我们上面提的第二个假设相对应! 带着这个想法，我们点开超链接，来看看[RequireObjectCoercible](https://tc39.es/ecma262/#sec-requireobjectcoercible)到底做了什么。
+这个`?`简写可以让我们得出结论:在某些情况下，[RequireObjectCoercible](https://tc39.es/ecma262/#sec-requireobjectcoercible)[抽象操作](#-22-抽象操作)可能会抛出异常，否则用`!`就可以了。如果它抛出一个错误，那么它将与我们上面提的第二个假设相对应! 带着这个想法，我们点开超链接，来看看[RequireObjectCoercible](https://tc39.es/ecma262/#sec-requireobjectcoercible)到底做了什么。
 
-[抽象操作](https://timothygu.me/es-howto/#abstract-operation) [RequireObjectCoercible](https://tc39.es/ecma262/#sec-requireobjectcoercible)看起来有点奇怪。与大多数抽象操作不同，它是通过表而不是算法步骤来定义的:
+[抽象操作](#-22-抽象操作) [RequireObjectCoercible](https://tc39.es/ecma262/#sec-requireobjectcoercible)看起来有点奇怪。与大多数抽象操作不同，它是通过表而不是算法步骤来定义的:
 
 >| Argument Type（参数类型） | Result（结果）        |
 >| ------------- |:-------------:|
@@ -504,7 +503,7 @@ JavaScript对象也可以通过定义 ***内部槽*** 来包含某些特定类�
 >```
 >
 
-###  3.7. <a name='2.7.BooleanString'></a>§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?  
+### <a name='2.7.BooleanString'></a>§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?  
 
 当在编写任务中重要且关键的代码时，我们通常会将异常处理会放在编码的首要位置。所以，*“我现在用的这个内置函数是不是会抛出异常呢?”* 这样的问题，我们经常会考虑。
 
@@ -543,7 +542,7 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 >3. 如果NewTarget为**undefined**，则返回*s*。
 >4. 返回 ? [StringCreate](https://tc39.es/ecma262/#sec-stringcreate)(*s*, ? [GetPrototypeFromConstructor](https://tc39.es/ecma262/#sec-getprototypefromconstructor)(NewTarget, `"%StringPrototype%"`)).
 
-根据分析Boolean()函数的相关经验，对于当前的情况，我们可以知道NewTarget也始终应该为**undefined**，因此最后一步可以跳过。同时我们还知道[Type](https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values)和[SymbolDescriptiveString](https://tc39.es/ecma262/#sec-symboldescriptivestring)也是安全的，因为它们都不会处理abrupt completions。然而，在调用[ToString](https://timothygu.me/es-howto/#abstract-opdef-tostring)[抽象操作](https://timothygu.me/es-howto/#abstract-operation)之前，仍然有一个泄密者--`?`。让我们来仔细看看吧。  
+根据分析Boolean()函数的相关经验，对于当前的情况，我们可以知道NewTarget也始终应该为**undefined**，因此最后一步可以跳过。同时我们还知道[Type](https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values)和[SymbolDescriptiveString](https://tc39.es/ecma262/#sec-symboldescriptivestring)也是安全的，因为它们都不会处理abrupt completions。然而，在调用[ToString](https://timothygu.me/es-howto/#abstract-opdef-tostring)[抽象操作](#-22-抽象操作)之前，仍然有一个泄密者--`?`。让我们来仔细看看吧。  
 
 就像我们早些时候看到的 [RequireObjectCoercible](https://tc39.es/ecma262/#sec-requireobjectcoercible)一样，[ToString](https://timothygu.me/es-howto/#abstract-opdef-tostring)(*argument*)也是用一个表定义的:  
 
@@ -645,15 +644,15 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 
 因此，对于String()，我们的结论是：**对于原始值它永远不会抛出异常，但对于Object则可能会抛出错误**。
 
-###  3.8. <a name='2.8.typeof'></a>§ 2.8. 示例: `typeof` 运算符  
+### <a name='2.8.typeof'></a>§ 2.8. 示例: `typeof` 运算符  
 
 到目前为止，我们只分析了API函数，是时候让我们尝试一些不同的东西了！！
 
 >ISSUE 1 未完待续 [<https://github.com/TimothyGu/es-howto/issues/2>](<https://github.com/TimothyGu/es-howto/issues/2>)
 
-##  4. <a name='-1'></a>§ 术语表  
+##  <a name='3.'></a>§ 术语表  
 
-###  4.1. <a name='-1'></a>§ 常见的抽象操作  
+### <a name='3.1'></a>§ 常见的抽象操作  
 
 ***ArrayCreate (length [， proto]) [(spec)](https://tc39.es/ecma262/#sec-arraycreate)***
 >创建一个长度为 *length* 的数组对象，将proto作为\[[Prototype]][内部槽](https://timothygu.me/es-howto/#internal-slot)的值。如果未指定proto，则使用[当前领域](https://tc39.es/ecma262/#current-**realm**)中的[%ArrayPrototype%](https://tc39.es/ecma262/#sec-properties-of-the-array-prototype-object)。如果Array构造函数和它的所有属性都没有被打上猴子补丁，并且proto没有被指定或者%ArrayPrototype%在[当前领域](https://tc39.es/ecma262/#current-**realm**)中的话，那么将等价于`new Array(length)`。
@@ -688,7 +687,7 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 
 ***ReturnIfAbrupt ( argument ) [(spec)](https://tc39.es/ecma262/#sec-returnifabrupt)***
 检查 *argument* 是否为 [abrupt completion](https://timothygu.me/es-howto/#abrupt-completion)(比如一个抛出的异常)，如果是，则返回该[abrupt completion](https://timothygu.me/es-howto/#abrupt-completion)(并允许异常向上冒泡)。另外，如果参数是 [normal completion](https://timothygu.me/es-howto/#normal-completion)，则将`Completion Record`展开，并将 *`argument`* 设置为 *`argument.[[Value]]`*。
-又见 [§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](https://timothygu.me/es-howto/#completion-records-and-shorthands)
+又见 [§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](#24-completion-records-及特殊符号--和-)
 
 ***StringCreate ( value, prototype ) [(spec)](https://tc39.es/ecma262/#sec-stringcreate)***
 返回一个与String *value*对应的包装字符串对象，包装对象的内部槽`[[Prototype]]`作为*prototype*。如果*prototype*是当前领域的%StringPrototype%，则等价于 new [String](https://tc39.es/ecma262/#sec-string-constructor-string-value)(value)。
@@ -727,16 +726,66 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 ***Type ( argument ) [(spec)](https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values)***
 返回 *argument* 的类型。
 
-##  5. <a name='-1'></a>§ 术语索引
+## <a name='4.'></a>§ 术语索引
 
-###  5.1. <a name='-1'></a>§  规范定义的术语
+### <a name='4.1.'></a>§  规范定义的术语
+[!](#24-completion-records-及特殊符号--和-),
+[?](#24-completion-records-及特殊符号--和-),
+[abrupt completion](#24-completion-records-及特殊符号--和-),
+[abstract operation](#-22-抽象操作),
+[ArrayCreate](#a-name31a§-常见的抽象操作),
+[break](#24-completion-records-及特殊符号--和-),
+[Call](#a-name31a§-常见的抽象操作),
+[callable object](#-25-javascript-objects),
+[Completion Record](#24-completion-records-及特殊符号--和-),
+[Construct](#a-name31a§-常见的抽象操作),
+[continue](#24-completion-records-及特殊符号--和-),
+[DefinePropertyOrThrow](#a-name31a§-常见的抽象操作),
+[DeletePropertyOrThrow](#a-name31a§-常见的抽象操作),
+[double brackets notation](#-23-this-是什么),
+[exotic object](#-25-javascript-objects),
+[field](#-231-record-字段),
+[function object](#-25-javascript-objects),
+[Get](#a-name31a§-常见的抽象操作),
+[GetV](#a-name31a§-常见的抽象操作),
+[HasOwnProperty](#a-name31a§-常见的抽象操作),
+[HasProperty](#a-name31a§-常见的抽象操作),
+[internal method](#-25-javascript-objects),
+[internal slot](#-25-javascript-objects),
+[Invoke](#a-name31a§-常见的抽象操作),
+[IsArray](#a-name31a§-常见的抽象操作),
+[IsCallable](#a-name31a§-常见的抽象操作),
+[IsConstructor](#a-name31a§-常见的抽象操作),
+[NewTarget](#-27-示例-boolean-与-string-会抛出异常么),
+[normal](#24-completion-records-及特殊符号--和-),
+[normal completion](#24-completion-records-及特殊符号--和-),
+[ordinary object](#-25-javascript-objects),
+[Record](#-231-record-字段),
+[return](#24-completion-records-及特殊符号--和-),
+[ReturnIfAbrupt](#a-name31a§-常见的抽象操作),
+[StringCreate](#a-name31a§-常见的抽象操作),
+[[[Target]]](#24-completion-records-及特殊符号--和-),
+[throw](#24-completion-records-及特殊符号--和-),
+[ToBoolean](#a-name31a§-常见的抽象操作),
+[ToInt16](#a-name31a§-常见的抽象操作),
+[ToInt32](#a-name31a§-常见的抽象操作),
+[ToInt8](#a-name31a§-常见的抽象操作),
+[ToInteger](#a-name31a§-常见的抽象操作),
+[ToNumber](#a-name31a§-常见的抽象操作),
+[ToObject](#a-name31a§-常见的抽象操作),
+[ToPrimitive](#a-name31a§-常见的抽象操作),
+[ToString](#a-name31a§-常见的抽象操作),
+[ToUint16](#a-name31a§-常见的抽象操作),
+[ToUint32](#a-name31a§-常见的抽象操作),
+[ToUint8](#a-name31a§-常见的抽象操作),
+[ToUint8Clamp](#a-name31a§-常见的抽象操作),
+[[[Type]]](#24-completion-records-及特殊符号--和-),
+[Type](#a-name31a§-常见的抽象操作),
+[[[Value]]](#24-completion-records-及特殊符号--和-),
 
+## <a name='5.'></a>§ 参考  
 
-###  5.2. <a name='-1'></a>§  引用术语
-
-##  6. <a name='-1'></a>§ 参考  
-
-###  6.1. <a name='-1'></a>§ 参考文献  
+### <a name='5.1.'></a>§ 参考文献  
 
 [CONSOLE]
 Dominic Farolino; Terin Stock; Robert Kowalski. Console Standard. Living Standard. URL: [https://console.spec.whatwg.org/](https://console.spec.whatwg.org/)
@@ -768,7 +817,7 @@ Randall Munroe. xkcd: Honor Societies. URL: [https://www.xkcd.com/703/](https://
 [YDKJS]
 Kyle Simpson. You Don't Know JS (book series). URL: [https://github.com/getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
 
-##  7. <a name='ISSUS'></a>§ ISSUS  
+## <a name='ISSUS'></a>§ ISSUS  
 
 >ISSUS 1 待补充 [<https://github.com/TimothyGu/es-howto/issues/2>](<https://github.com/TimothyGu/es-howto/issues/2>)
 
