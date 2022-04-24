@@ -1,35 +1,36 @@
 <!-- vscode-markdown-toc -->
-* 1. [提要](#)
-* 2. [[§](#§-1-序) 1. 序](#-1-1.)
-	* 2.1. [[§](#§-11-为什么需要阅读ecmascript规范) 1.1. 为什么需要阅读ECMAScript规范](#-11-ecmascript1.1.ECMAScript)
-	* 2.2. [§ 1.2. 哪些属于ECMAScript规范，哪些不属于](#1.2.ECMAScript)
-	* 2.3. [§ 1.3. 在进一步讨论之前，ECMAScript规范在哪里?](#1.3.ECMAScript)
-	* 2.4. [§ 1.4. 规范导航](#1.4.)
-* 3. [§ 2. 运行时语义](#2.)
-	* 3.1. [§ 2.1. 算法步骤](#2.1.)
-	* 3.2. [§ 2.2. 抽象操作](#2.2.)
-	* 3.3. [§ 2.3. `[[This]]` 是什么？](#2.3.This)
-		* 3.3.1. [§ 2.3.1. Record 字段](#2.3.1.Record)
-		* 3.3.2. [§ 2.3.2. JavaScript对象的内部槽](#2.3.2.JavaScript)
-		* 3.3.3. [§ 2.3.3. JavaScript对象的内部方法](#2.3.3.JavaScript)
-	* 3.4. [§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](#2.4CompletionRecords)
-	* 3.5. [§ 2.5. JavaScript Objects](#2.5.JavaScriptObjects)
-	* 3.6. [§ 2.6. 示例: String.prototype.substring()](#2.6.:String.prototype.substring)
-	* 3.7. [§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?](#2.7.:BooleanString)
-	* 3.8. [§ 2.8. 示例: `typeof` 运算符](#2.8.:typeof)
-* 4. [§ 术语表](#-1)
-	* 4.1. [§ 常见的抽象操作](#-1)
-* 5. [§ 术语索引](#-1)
-	* 5.1. [§  由本规范定义的术语](#-1)
-* 6. [§ 参考](#-1)
-	* 6.1. [§ 参考文献](#-1)
-* 7. [§ ISSUS](#ISSUS)
+*  [[§] 1. 序](#1.)
+	* [[§] 1.1. 为什么需要阅读ECMAScript规范](#1.1.ECMAScript)
+	* [§ 1.2. 哪些属于ECMAScript规范，哪些不属于](#1.2.ECMAScript)
+	* [§ 1.3. 在进一步讨论之前，ECMAScript规范在哪里?](#1.3.ECMAScript)
+	* [§ 1.4. 规范导航](#1.4.)
+*  [§ 2. 运行时语义](#2.)
+	* [§ 2.1. 算法步骤](#2.1.)
+	* [§ 2.2. 抽象操作](#2.2.)
+	* [§ 2.3. `[[This]]` 是什么？](#2.3.This)
+		* [§ 2.3.1. Record 字段](#2.3.1.Record)
+		* [§ 2.3.2. JavaScript对象的内部槽](#2.3.2.JavaScript)
+		* [§ 2.3.3. JavaScript对象的内部方法](#2.3.3.JavaScript)
+	* [§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](#2.4CompletionRecords)
+	* [§ 2.5. JavaScript Objects](#2.5.JavaScriptObjects)
+	* [§ 2.6. 示例: String.prototype.substring()](#2.6.:String.prototype.substring)
+	* [§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?](#2.7.:BooleanString)
+	* [§ 2.8. 示例: `typeof` 运算符](#2.8.:typeof)
+* [§ 术语表](#-1)
+	* [§ 常见的抽象操作](#-1)
+* [§ 术语索引](#-1)
+	* [§  规范定义的术语](#-1)
+	* [§  引用术语](#-1)
+* [§ 参考](#-1)
+	* [§ 参考文献](#-1)
+* [§ ISSUS](#ISSUS)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc --># 如何阅读 ECMAScript 规范
+<!-- /vscode-markdown-toc -->
+# 如何阅读 ECMAScript 规范
 
 在线版，2020-3-28
 
@@ -41,19 +42,19 @@
 
 **作者**：[Timothy Gu](https://timothygu.me/) [timothygu99@gmail.com](timothygu99@gmail.com)
 
-##  1. <a name=''></a>提要
+## 提要
 
 如果你想学习JavaScript复杂的工作原理的话，那么ECMAScript语言规范(又名JavaScript规范，或ECMA-262)是一个非常好的资源文献。然而，当你刚开始看到那巨量的文字篇幅时，你可能会望而却步。而本文编写的目的就是为了让你以一种更简单的方式去阅读这本最佳的JavaScript语言参考规范。
 
 
 
-##  2. <a name='-1-1.'></a>[§](#§-1-序) 1. 序
+## <a name='1.'></a>[§] 1. 序
 
 ECMAScript规范每天阅读一点点，健康快乐多一点！阅读规范也许这是你的新年愿望，亦或是某个医生开的处方（开个玩笑😂）。总之，不管出于什么原因，欢迎欢迎!
 
 > **注:** 在本文中，我将使用术语“ECMAScript”来指代规范本身，而在其他地方使用“JavaScript”。然而，总体上这两个术语指的是同一件事。(ECMAScript和JavaScript之间有一些历史上的区别，但这超出了本文的讨论范围，你可以[google一下轻松了解这些区别](https://www.google.com/search?q=ecmascript+vs.+javascript)。)  
 
-###  2.1. <a name='-11-ecmascript1.1.ECMAScript'></a>[§](#§-11-为什么需要阅读ecmascript规范) 1.1. 为什么需要阅读ECMAScript规范  
+### <a name='1.1.ECMAScript'></a>[§] 1.1. 为什么需要阅读ECMAScript规范  
 
 ECMAScript规范是所有JavaScript实现的权威参考资料。无论JavaScript是运行在你的浏览器[[什么是我的浏览器]](https://timothygu.me/es-howto/#biblio-whatismybrowser)，还是在你的Node.js服务器上 [[NODEJS]](https://timothygu.me/es-howto/#biblio-nodejs)，亦或是在你的物联网设备上[[JOHNNY-FIVE]](https://timothygu.me/es-howto/#biblio-johnny-five)，都要遵循ECMAScript规范。所有JavaScript引擎的开发人员也都依赖于该规范进行开发，以确保他们的新特性能够像其他JavaScript引擎一样按照预期的方式工作。  
 但我认为该规范不仅仅对“JavaScript引擎开发人员”这种大神有用，实际上它对普通的JavaScript程序员同样非常有用，只是你还没有意识到而已。
@@ -84,7 +85,7 @@ Set {}
 
 OK，现在你知道了，规范是非常有用的工具，而且可以帮助你理解语言或平台的复杂性。那么ECMAScript规范的范围究竟包括哪些内容呢?
 
-###  2.2. <a name='1.2.ECMAScript'></a>§ 1.2. 哪些属于ECMAScript规范，哪些不属于
+### <a name='1.2.ECMAScript'></a>§ 1.2. 哪些属于ECMAScript规范，哪些不属于
 
 规范上对这个问题的回答是“只有语言特性才属于了ECMAScript规范”。说了又好像没说，因为这就像是在说“JavaScript特性就是JavaScript”。我不喜欢这种重复又无聊的说法!  [[XKCD-703]](https://timothygu.me/es-howto/#biblio-xkcd-703)
 
@@ -727,8 +728,10 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 
 ##  5. <a name='-1'></a>§ 术语索引
 
-###  5.1. <a name='-1'></a>§  由本规范定义的术语
+###  5.1. <a name='-1'></a>§  规范定义的术语
 
+
+###  5.2. <a name='-1'></a>§  引用术语
 
 ##  6. <a name='-1'></a>§ 参考  
 
