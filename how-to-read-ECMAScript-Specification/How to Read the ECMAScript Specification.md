@@ -1,4 +1,35 @@
-# 如何阅读 ECMAScript 规范
+<!-- vscode-markdown-toc -->
+* 1. [提要](#)
+* 2. [[§](#§-1-序) 1. 序](#-1-1.)
+	* 2.1. [[§](#§-11-为什么需要阅读ecmascript规范) 1.1. 为什么需要阅读ECMAScript规范](#-11-ecmascript1.1.ECMAScript)
+	* 2.2. [§ 1.2. 哪些属于ECMAScript规范，哪些不属于](#1.2.ECMAScript)
+	* 2.3. [§ 1.3. 在进一步讨论之前，ECMAScript规范在哪里?](#1.3.ECMAScript)
+	* 2.4. [§ 1.4. 规范导航](#1.4.)
+* 3. [§ 2. 运行时语义](#2.)
+	* 3.1. [§ 2.1. 算法步骤](#2.1.)
+	* 3.2. [§ 2.2. 抽象操作](#2.2.)
+	* 3.3. [§ 2.3. `[[This]]` 是什么？](#2.3.This)
+		* 3.3.1. [§ 2.3.1. Record 字段](#2.3.1.Record)
+		* 3.3.2. [§ 2.3.2. JavaScript对象的内部槽](#2.3.2.JavaScript)
+		* 3.3.3. [§ 2.3.3. JavaScript对象的内部方法](#2.3.3.JavaScript)
+	* 3.4. [§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](#2.4CompletionRecords)
+	* 3.5. [§ 2.5. JavaScript Objects](#2.5.JavaScriptObjects)
+	* 3.6. [§ 2.6. 示例: String.prototype.substring()](#2.6.:String.prototype.substring)
+	* 3.7. [§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?](#2.7.:BooleanString)
+	* 3.8. [§ 2.8. 示例: `typeof` 运算符](#2.8.:typeof)
+* 4. [§ 术语表](#-1)
+	* 4.1. [§ 常见的抽象操作](#-1)
+* 5. [§ 术语索引](#-1)
+	* 5.1. [§  由本规范定义的术语](#-1)
+* 6. [§ 参考](#-1)
+	* 6.1. [§ 参考文献](#-1)
+* 7. [§ ISSUS](#ISSUS)
+
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc --># 如何阅读 ECMAScript 规范
 
 在线版，2020-3-28
 
@@ -10,17 +41,19 @@
 
 **作者**：[Timothy Gu](https://timothygu.me/) [timothygu99@gmail.com](timothygu99@gmail.com)
 
-## 提要
+##  1. <a name=''></a>提要
 
 如果你想学习JavaScript复杂的工作原理的话，那么ECMAScript语言规范(又名JavaScript规范，或ECMA-262)是一个非常好的资源文献。然而，当你刚开始看到那巨量的文字篇幅时，你可能会望而却步。而本文编写的目的就是为了让你以一种更简单的方式去阅读这本最佳的JavaScript语言参考规范。
 
-## [§](#§-1-序) 1. 序
+
+
+##  2. <a name='-1-1.'></a>[§](#§-1-序) 1. 序
 
 ECMAScript规范每天阅读一点点，健康快乐多一点！阅读规范也许这是你的新年愿望，亦或是某个医生开的处方（开个玩笑😂）。总之，不管出于什么原因，欢迎欢迎!
 
 > **注:** 在本文中，我将使用术语“ECMAScript”来指代规范本身，而在其他地方使用“JavaScript”。然而，总体上这两个术语指的是同一件事。(ECMAScript和JavaScript之间有一些历史上的区别，但这超出了本文的讨论范围，你可以[google一下轻松了解这些区别](https://www.google.com/search?q=ecmascript+vs.+javascript)。)  
 
-### [§](#§-11-为什么需要阅读ecmascript规范) 1.1. 为什么需要阅读ECMAScript规范  
+###  2.1. <a name='-11-ecmascript1.1.ECMAScript'></a>[§](#§-11-为什么需要阅读ecmascript规范) 1.1. 为什么需要阅读ECMAScript规范  
 
 ECMAScript规范是所有JavaScript实现的权威参考资料。无论JavaScript是运行在你的浏览器[[什么是我的浏览器]](https://timothygu.me/es-howto/#biblio-whatismybrowser)，还是在你的Node.js服务器上 [[NODEJS]](https://timothygu.me/es-howto/#biblio-nodejs)，亦或是在你的物联网设备上[[JOHNNY-FIVE]](https://timothygu.me/es-howto/#biblio-johnny-five)，都要遵循ECMAScript规范。所有JavaScript引擎的开发人员也都依赖于该规范进行开发，以确保他们的新特性能够像其他JavaScript引擎一样按照预期的方式工作。  
 但我认为该规范不仅仅对“JavaScript引擎开发人员”这种大神有用，实际上它对普通的JavaScript程序员同样非常有用，只是你还没有意识到而已。
@@ -39,19 +72,19 @@ TypeError: Method Set.prototype.add called on incompatible receiver #<Set>
     at Set.add (<anonymous>)
 > Set.prototype
 Set {}
-```  
+```
 
 一个方法能在它的原型上工作，而另一个方法却不能在它的原型上工作，为什么？你是不是非常困惑？而更不幸的是，[google在你最需要它的时候也无法帮助你](https://www.google.com/search?q=array+prototype+push+on+prototype)，同样，[无所不能的Stack Overflow也会对此束手无策](https://stackoverflow.com/search?q=array+prototype+push+on+prototype)。
-**但阅读ECMAScript规范会帮助到你哦！**
+**但阅读ECMAScript规范会帮助到你喔！**
 
 或者，你可能想知道‘臭名昭著’的[松散相等操作符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Equality_operators)(==)是如何真正发挥作用的(“function”这个词这里也是松散使用[[WAT]](https://timothygu.me/es-howto/#biblio-wat))。而当曾经那个勤奋的你在MDN上找到它时，只会发现它的[解释段落](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Using_the_Equality_Operators)伤眼而又无助[MDN]。
-**但阅读ECMAScript规范会帮助到你！**
+**但阅读ECMAScript规范会帮助到你喔！**
 
-另一方面，我不建议刚接触JavaScript的开发人员阅读ECMAScript规范。如果你是JavaScript新手，那就先玩玩Web吧!先构建一些web应用程序，或者一些基于javascript的保姆摄像头!或任何JavaScript东西!当你趟过了足够多的JavaScript的坑或者变得经验丰富而不必担心JavaScript时，在考虑回到本文档。
+另一方面，我不建议刚接触JavaScript的开发人员阅读ECMAScript规范。如果你是JavaScript新手，那就先玩玩Web吧!先构建一些web应用程序，或者一些基于javascript的保姆摄像头！或任何JavaScript东西！当你趟过了足够多的JavaScript的坑或者变得经验丰富而不必担心JavaScript时，在考虑回到本文档。
 
 OK，现在你知道了，规范是非常有用的工具，而且可以帮助你理解语言或平台的复杂性。那么ECMAScript规范的范围究竟包括哪些内容呢?
 
-### § 1.2. 哪些属于ECMAScript规范，哪些不属于
+###  2.2. <a name='1.2.ECMAScript'></a>§ 1.2. 哪些属于ECMAScript规范，哪些不属于
 
 规范上对这个问题的回答是“只有语言特性才属于了ECMAScript规范”。说了又好像没说，因为这就像是在说“JavaScript特性就是JavaScript”。我不喜欢这种重复又无聊的说法!  [[XKCD-703]](https://timothygu.me/es-howto/#biblio-xkcd-703)
 
@@ -100,7 +133,7 @@ OK，现在你知道了，规范是非常有用的工具，而且可以帮助你
 >
 >[5] 这些都是仅针对浏览器的内容。
 
-### § 1.3. 在进一步讨论之前，ECMAScript规范在哪里?  
+###  2.3. <a name='1.3.ECMAScript'></a>§ 1.3. 在进一步讨论之前，ECMAScript规范在哪里?  
 
 当你[google“ECMAScript规范”](https://www.google.com/search?q=ecmascript+specification)时，你会搜索到非常多的结果，它们看起来都是正规合法的规范。那你应该选择哪一个呢?  
 
@@ -110,13 +143,13 @@ OK，现在你知道了，规范是非常有用的工具，而且可以帮助你
 
 ECMAScript语言规范是由一群来自不同背景的人开发的，他们被称为 Ecma International Technical Committee 39(或者更熟悉的说法是TC39 [[TC39]](https://timothygu.me/es-howto/#biblio-tc39))。TC39维护了ECMAScript语言的最新规范TC39.es [[ECMA-262]](https://timothygu.me/es-howto/#biblio-ecma-262)。  
 
-复杂化的是，每年TC39都会选择一个时间点来获取该规范的快照，并附上一个版本号，也就成为了当年的ECMAScript语言标准。例如，ECMAScript®2019语言规范(ECMA-262，第十版) [[ECMA-262-2019]](https://timothygu.me/es-howto/#biblio-ecma-262-2019) (通常被称为 ES10 或 ES2019 ) 是2019年6月 tc39.es [[ECMA-262]](https://timothygu.me/es-howto/#biblio-ecma-262)上的规范.该规范被放入甲醛中，再经过适当的压缩包装处理，用于永久存档。  
+复杂化的是，每年TC39都会选择一个时间点来获取该规范的快照，并附上一个版本号，也就成为了当年的ECMAScript语言标准。例如，ECMAScript®2019语言规范(ECMA-262，第十版) [[ECMA-262-2019]](https://timothygu.me/es-howto/#biblio-ecma-262-2019) (通常被称为 ES10 或 ES2019 ) 是2019年6月 tc39.es [[ECMA-262]](https://timothygu.me/es-howto/#biblio-ecma-262)上的规范。该规范被放入福尔马林中，再经过适当的压缩包装处理，用于永久存档。  
 
 因此，除非你想让你的web应用程序只运行在2019年6月的浏览器上，否则你总是希望查看最新的规范 tc39.es [[ECMA-262]](https://timothygu.me/es-howto/#biblio-ecma-262)。但如果你想(或必须)支持旧的浏览器或Node.js版本，那么参考旧的规范可能会有帮助。  
 
 >注:ISO/IEC还将ECMAScript语言标准重新发布为ISO/IEC 22275 [[ISO-22275-2018]](https://timothygu.me/es-howto/#biblio-iso-22275-2018)。不过不用担心，因为该标准基本上是一个到[[ECMA-262]](https://timothygu.me/es-howto/#biblio-ecma-262)的超链接。  
 
-### § 1.4. 规范导航  
+###  2.4. <a name='1.4.'></a>§ 1.4. 规范导航  
 
 ECMAScript规范谈论了**非常多**的东西。即使它的作者尽力把它分成有逻辑的块，但仍然还有巨大的文本阅读量。  
 
@@ -145,13 +178,13 @@ ECMAScript规范谈论了**非常多**的东西。即使它的作者尽力把它
 
 我想说的是，绝对没有人会从头到尾地阅读规范。相反，我们只需要查看与我们试图寻找的内容相对应的部分，并在该部分中查看我们需要的内容。试着确定你的问题与五大部分中的哪一个相关;如果你无法确定是哪一个，问你自己这个问题“这是在什么时候运算的(无论你想确定什么)?”这样可能会更有帮助。不要太担心，通过练习，使用规范会变得更容易。  
 
-## § 2. 运行时语义  
+##  3. <a name='2.'></a>§ 2. 运行时语义  
 
 语言运行时语义和APIs是规范中最大的部分，通常也是我们最关心的部分。  
 
 总的来说，阅读这些部分是非常简单的。但是，该规范使用了许多的简写对刚开始使用的人来说是非常棘手的(至少对我来说)。下面我将尝试解释其中的一些约定，然后将它们应用到一个常规的工作流中，来弄清楚这些是如何工作的。  
 
-### § 2.1. 算法步骤  
+###  3.1. <a name='2.1.'></a>§ 2.1. 算法步骤  
 
 ECMAScript中的大多数运行时语义都是由一系列算法步骤指定的，这与伪代码没什么不同，但形式要精确得多。  
 
@@ -168,7 +201,7 @@ ECMAScript中的大多数运行时语义都是由一系列算法步骤指定的�
 
 >延伸阅读: [§5.2 算法的约定](https://tc39.es/ecma262/#sec-algorithm-conventions)
 
-### § 2.2. 抽象操作
+###  3.2. <a name='2.2.'></a>§ 2.2. 抽象操作
 
 有时你会在规范中看到某些像是函数调用的东西。比如Boolean()函数的第一步是:  
 
@@ -183,15 +216,15 @@ ECMAScript中的大多数运行时语义都是由一系列算法步骤指定的�
 
 >延伸阅读: [§5.2.1抽象操作](https://tc39.es/ecma262/#sec-algorithm-conventions-abstract-operations)
 
-### § 2.3. `[[This]]` 是什么？
+###  3.3. <a name='2.3.This'></a>§ 2.3. `[[This]]` 是什么？
 
 有时候，你可能会看到 ***`[[符号]]`*** 就像“把proto设置为obj.\[[Prototype]]”那样被使用。根据它出现的上下文，这个符号在技术上可以表示几种不同的东西，但你可能要花费很长时间才能理解，其实这个符号指的是某些无法通过JavaScript代码观察到的内部属性。  
 
 准确地说，它可以表示三种不同的东西，我将用规范中的示例来说明这一点。不过，现在可以跳过它们了。
 
-#### § 2.3.1. Record 字段
+####  3.3.1. <a name='2.3.1.Record'></a>§ 2.3.1. Record 字段
 
-ECMAScript规范使用`Record`这个术语来指代具有一组固定键的键值映射——有点像c语言中的结构。`Record`的每个键值对称为一个字段。因为`Record`只能出现在规范中，而不能出现在实际的JavaScript代码中，所以使用 ***`[[符号]]`*** 引用[Record](https://timothygu.me/es-howto/#record)的[字段](https://timothygu.me/es-howto/#record-field)是有意义的。  
+ECMAScript规范使用`Record`这个术语来指代具有一组固定键的键值映射——有点像c语言中的structure。`Record`的每个键值对称为一个字段。因为`Record`只能出现在规范中，而不能出现在实际的JavaScript代码中，所以使用 ***`[[符号]]`*** 引用[Record](https://timothygu.me/es-howto/#record)的[字段](https://timothygu.me/es-howto/#record-field)是有意义的。  
 
 >例2:
 >
@@ -207,7 +240,7 @@ ECMAScript规范使用`Record`这个术语来指代具有一组固定键的键�
 
 >延伸阅读: [§6.2.1 列表和 Record 规范类型](https://tc39.es/ecma262/#sec-list-and-record-specification-type)
 
-#### § 2.3.2. JavaScript对象的内部槽  
+####  3.3.2. <a name='2.3.2.JavaScript'></a>§ 2.3.2. JavaScript对象的内部槽  
 
 JavaScript对象可能会有一些所谓的[内部槽](https://timothygu.me/es-howto/#internal-slot)，而规范会使用这些槽来保存数据。像[Record字段](https://timothygu.me/es-howto/#record-field)那样，这些内部槽不能用JavaScript观察到，但可能其中的一些会通过特定的工具（如谷歌Chrome的DevTools）暴露出来。因此，使用[`[[符号]]`](https://timothygu.me/es-howto/#double-brackets-notation)来描述内部槽也是有意义的。  
 
@@ -221,9 +254,9 @@ JavaScript对象可能会有一些所谓的[内部槽](https://timothygu.me/es-h
 >
 > 1. 返回 `O.[[Prototype]]`.  
 
->注:对象的内部槽与[Record字段](https://timothygu.me/es-howto/#record-field)的内部槽在外观上是相同的，但无论它是一个对象还是一个[Record](https://timothygu.me/es-howto/#record)，都可以通过查看这个表示法的实例主体(出现在'.'之前的部分)来消除歧义。从上下文环境来看通常是很容易区别的。
+>注:对象的内部槽与[Record](https://timothygu.me/es-howto/#record-field)在外观上是相同的，但无论它是一个对象还是一个[Record](https://timothygu.me/es-howto/#record)，都可以通过查看这个表示法的实例主体(出现在'.'之前的部分)来消除歧义。从上下文环境来看通常是很容易区别的。
 
-#### § 2.3.3. JavaScript对象的内部方法  
+####  3.3.3. <a name='2.3.3.JavaScript'></a>§ 2.3.3. JavaScript对象的内部方法  
 
 JavaScript对象也有所谓的内部方法。像[内部槽](https://timothygu.me/es-howto/#internal-method)一样，这些[内部方法](https://timothygu.me/es-howto/#internal-method)不能通过JavaScript直接观察到。因此，使用[`[[符号]]`](https://timothygu.me/es-howto/#double-brackets-notation)来描述内部方法也是有意义的。  
 
@@ -239,7 +272,7 @@ JavaScript对象也有所谓的内部方法。像[内部槽](https://timothygu.m
 
 >注意:[`[[符号]]`](https://timothygu.me/es-howto/#double-brackets-notation)的第三种含义与其他含义的区别在于，它看起来更像一个函数调用。
 
-### § 2.4 `Completion Records` 及特殊符号 `?` 和 `!`  
+###  3.4. <a name='2.4CompletionRecords'></a>§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`  
 
 ECMAScript规范中的每个运行时语义都会显式或隐式地返回一个 ***Completion Record*** 结果。这个Completion Record可能拥有三种字段:  
 
@@ -257,7 +290,7 @@ ECMAScript规范中的每个运行时语义都会显式或隐式地返回一个 
 
 ✧  ✧  ✧  ✧  ✧  ✧   ✧   ✧   ✧   ✧   ✧   ✧   ✧   ✧   ✧   ✧  
 
-由于Completion Record的定义，JavaScript中的一些细节，比如在规范中不存在try-catch块时才会出现错误冒泡。事实上，错误(或者更精确地说，abrupt completions)都是显式处理的。  
+由于Completion Record的定义，JavaScript中的一些细节，比如错误冒泡在 try-catch块出现前是不存在的。事实上，错误(或者更精确地说，abrupt completions)都是显式处理的。  
 
 如果没有任何简写的话，一个普通调用抽象操作的文本说明将会是下面这样（该抽象操作可能返回计算结果，也可能抛出错误）:
 
@@ -265,25 +298,28 @@ ECMAScript规范中的每个运行时语义都会显式或隐式地返回一个 
 >
 >没有任何简写的抽象操作调用可能是这几个步骤:  
 >
-> 1. 把 resultCompletionRecord 设置为 AbstractOp().
->       >注意:resultCompletionRecord是一个[Completion Record](https://timothygu.me/es-howto/#completion-record)。
->
-> 2. 如果resultCompletionRecord 是 abrupt completion，则返回resultCompletionRecord。
->       >注意:这里，如果是abrupt completion，resultCompletionRecord将被直接返回。换句话说，AbstractOp中抛出的错误将被转发，剩余的步骤将被中止。
->
-> 3. 把 *result* 设置为 resultCompletionRecord.\[[value]]。
->      >注意:在确保我们得到一个 normal completion 后，我们可以通过展开[Completion Record](https://timothygu.me/es-howto/#completion-record)来获得我们需要的实际计算结果。
->
-> 4. *result* 就是我们想要的结果。现在，我们可以用它做更多的事情啦。
+>1. 把 resultCompletionRecord 设置为 AbstractOp().
+>      
+>      >注意:resultCompletionRecord是一个[Completion Record](https://timothygu.me/es-howto/#completion-record)。
+>      
+>2. 如果resultCompletionRecord 是 abrupt completion，则返回resultCompletionRecord。
+>      
+>      >注意:这里，如果是abrupt completion，resultCompletionRecord将被直接返回。换句话说，AbstractOp中抛出的错误将被转发，剩余的步骤将被中止。
+>      
+>3. 把 *result* 设置为 resultCompletionRecord.\[[value]]。
+>     
+>     >注意:在确保我们得到一个 normal completion 后，我们可以通过展开[Completion Record](https://timothygu.me/es-howto/#completion-record)来获得我们需要的实际计算结果。
+>     
+>4. *result* 就是我们想要的结果。现在，我们可以用它做更多的事情啦。
 >
 >这可能会唤醒你在C语言中的手动错误处理的记忆:
 >
 >```javascript  
->   int result = abstractOp();              // Step 1
->   if (result < 0)                         // Step 2
->     return result;                        // Step 2 (continued)
->                                           // Step 3 is unneeded
->   // func() succeeded; carrying on...     // Step 4
+>  int result = abstractOp();              // Step 1
+>  if (result < 0)                         // Step 2
+>    return result;                        // Step 2 (continued)
+>                                          // Step 3 is unneeded
+>  // func() succeeded; carrying on...     // Step 4
 >```
 >
 >##  
@@ -294,13 +330,15 @@ ECMAScript规范中的每个运行时语义都会显式或隐式地返回一个 
 >
 >以下几个步骤会调用一个抽象操作，该操作可能会抛出[***ReturnIfAbrupt***](https://timothygu.me/es-howto/#abstract-opdef-returnifabrupt):
 >
-> 1. 把 *result* 设置为 AbstractOp().
->     >注:这里，就像前面例子中的第1步一样，*result*是一个[Completion Record](https://timothygu.me/es-howto/#completion-record)。
->
-> 2. [ReturnIfAbrupt](https://timothygu.me/es-howto/#abstract-opdef-returnifabrupt)(result).
->     >注:[ReturnIfAbrupt](https://timothygu.me/es-howto/#abstract-opdef-returnifabrupt)通过转发处理abrupt completions ，并自动将 *result* 展开为它的\[[Value]]。
->
-> 3. *result* 就是我们需要的结果。现在我们可以用它做更多的事情啦。
+>1. 把 *result* 设置为 AbstractOp().
+>    
+>    >注:这里，就像前面例子中的第1步一样，*result*是一个[Completion Record](https://timothygu.me/es-howto/#completion-record)。
+>    
+>2. [ReturnIfAbrupt](https://timothygu.me/es-howto/#abstract-opdef-returnifabrupt)(result).
+>    
+>    >注:[ReturnIfAbrupt](https://timothygu.me/es-howto/#abstract-opdef-returnifabrupt)通过转发处理abrupt completions ，并自动将 *result* 展开为它的\[[Value]]。
+>    
+>3. *result* 就是我们需要的结果。现在我们可以用它做更多的事情啦。
 
 或者，更准确地说，用特殊的问号(?)符号表示:  
 
@@ -308,10 +346,11 @@ ECMAScript规范中的每个运行时语义都会显式或隐式地返回一个 
 >
 >通过一个问号(?)将抽象操作结果抛出，分为下面这几个步:
 >
-> 1. 把 *result* 设置为 ? AbstractOp()
->     >注意:在这个表示法中，我们根本不去处理Completion Records。这个 ? 简写可以帮我们处理所有的事情，并且这个*result*可以立即使用。
->
-> 2. *result*就是我们所想要的。现在我们可以用它做更多的事情啦。
+>1. 把 *result* 设置为 ? AbstractOp()
+>    
+>    >注意:在这个表示法中，我们根本不去处理Completion Records。这个 ? 简写可以帮我们处理所有的事情，并且这个*result*可以立即使用。
+>    
+>2. *result*就是我们所想要的。现在我们可以用它做更多的事情啦。
 
 ✧  ✧  ✧  ✧  ✧  ✧   ✧   ✧   ✧   ✧   ✧   ✧   ✧   ✧   ✧   ✧
 
@@ -321,20 +360,21 @@ ECMAScript规范中的每个运行时语义都会显式或隐式地返回一个 
 >
 >通过加一个感叹号(`!`)，该抽象操作的abrupt completions将永远不会被抛出，分为下面这几个步:
 >
-> 1. 把 *result* 设置为 ! AbstractOp().
->     >注: `?` 会转发所有可能得到的错误，而`!`则会断言我们从这个调用中永远不会得到abrupt completions，如果得到了，那将是规范中一个bug。和?的情况一样，我们根本不会去处理 Completion Records 。并且*result*可以立即使用。
->
-> 2. *result*就是我们需要的。现在我们可以用它做更多的事情啦。
+>1. 把 *result* 设置为 ! AbstractOp().
+>    
+>    >注: `?` 会转发所有可能得到的错误，而`!`则会断言我们从这个调用中永远不会得到abrupt completions，如果得到了，那将是规范中一个bug。和?的情况一样，我们根本不会去处理 Completion Records 。并且*result*可以立即使用。
+>    
+>2. *result*就是我们需要的。现在我们可以用它做更多的事情啦。
 >
 >**小心！**
-> 不可否认的，`!`它看起来像一个有效的JavaScript表达式，这个可能会让令人困惑:
+>不可否认的，`!`它看起来像一个有效的JavaScript表达式，这个可能会让令人困惑:
 >> 1. 把 b 设置为 ! ToBoolean(value).
 >>  — 摘至 [Boolean()](https://tc39.es/ecma262/#sec-boolean-constructor-boolean-value).
->这里`!`仅仅意味着我们确信对ToBoolean的调用永远不会返回异常，而不是取相反的结果!
+> 这里`!`仅仅意味着我们确信对ToBoolean的调用永远不会返回异常，而不是取相反的结果!
 
 >延伸阅读: [§5.2.3.4 ReturnIfAbrupt 简写](https://tc39.es/ecma262/#sec-completion-record-specification-type)
 
-### § 2.5. JavaScript Objects
+###  3.5. <a name='2.5.JavaScriptObjects'></a>§ 2.5. JavaScript Objects
 
 在ECMAScript中，一部分在讲每个对象都有的内部方法集，而规范的其余部分就是在讲通过调用这些方法来执行特定的任务。所有对象都有以下几个内部方法:
 
@@ -403,7 +443,7 @@ JavaScript对象也可以通过定义 ***内部槽*** 来包含某些特定类�
 
 ![这是图片](./img/object-uml.svg "Object UML")  
 
-### § 2.6. 示例: String.prototype.substring()  
+###  3.6. <a name='2.6.:String.prototype.substring'></a>§ 2.6. 示例: String.prototype.substring()  
 
 现在我们已经比较理解规范是如何组织和编写的了，那接下来让我们来练习一下!  
 假设我现在有一个问题:
@@ -447,22 +487,22 @@ JavaScript对象也可以通过定义 ***内部槽*** 来包含某些特定类�
 >
 >```javascript  
 >   TypeError: String.prototype.substring called on null or undefined
->```  
+>```
 >
 >在Mozilla Firefox 57.0 上给出了更少的有用信息
 >
 >```javascript  
 >   TypeError: can’t convert undefined to object
->```  
+>```
 >
 >而与此同时，ChakraCore 1.7.5.0版本(微软Edge中的JavaScript引擎)采用了V8的路线却抛出了
 >
 >```javascript  
 >   TypeError: String.prototype.substring: 'this' is null or undefined
->```  
+>```
 >
 
-### § 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?  
+###  3.7. <a name='2.7.:BooleanString'></a>§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?  
 
 当在编写任务中重要且关键的代码时，我们通常会将异常处理会放在编码的首要位置。所以，*“我现在用的这个内置函数是不是会抛出异常呢?”* 这样的问题，我们经常会考虑。
 
@@ -533,7 +573,7 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 >    throw new Error("Breaking JavaScript");
 >  }
 >});
->```  
+>```
 >
 >```javascript  
 >// Spec stack trace:
@@ -545,7 +585,7 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 >    return "Breaking JavaScript";
 >  }
 >});
->```  
+>```
 >
 >```javascript  
 >// Spec stack trace:
@@ -556,7 +596,7 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 >    throw new Error("Breaking JavaScript");
 >  }
 >});
->```  
+>```
 >
 >```javascript  
 >// Spec stack trace:
@@ -567,7 +607,7 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 >    return { "breaking": "JavaScript" };
 >  }
 >});
->```  
+>```
 >
 >```javascript  
 >// Spec stack trace:
@@ -579,7 +619,7 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 >    throw new Error("Breaking JavaScript");
 >  }
 >});
->```  
+>```
 >
 >```javascript  
 >// Spec stack trace:
@@ -591,7 +631,7 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 >    throw new Error("Breaking JavaScript");
 >  }
 >});
->```  
+>```
 >
 >```javascript  
 >// Spec stack trace:
@@ -599,19 +639,19 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 >//   ToPrimitive step 2.g.
 >
 >String(Object.create(null));
->```  
+>```
 
 因此，对于String()，我们的结论是：**对于原始值它永远不会抛出异常，但对于Object则可能会抛出错误**。
 
-### § 2.8. 示例: `typeof` 运算符  
+###  3.8. <a name='2.8.:typeof'></a>§ 2.8. 示例: `typeof` 运算符  
 
 到目前为止，我们只分析了API函数，是时候让我们尝试一些不同的东西了！！
 
 >ISSUE 1 未完待续 [<https://github.com/TimothyGu/es-howto/issues/2>](<https://github.com/TimothyGu/es-howto/issues/2>)
 
-## § 术语表  
+##  4. <a name='-1'></a>§ 术语表  
 
-### § 常见的抽象操作  
+###  4.1. <a name='-1'></a>§ 常见的抽象操作  
 
 ***ArrayCreate (length [， proto]) [(spec)](https://tc39.es/ecma262/#sec-arraycreate)***
 >创建一个长度为 *length* 的数组对象，将proto作为\[[Prototype]][内部槽](https://timothygu.me/es-howto/#internal-slot)的值。如果未指定proto，则使用[当前领域](https://tc39.es/ecma262/#current-**realm**)中的[%ArrayPrototype%](https://tc39.es/ecma262/#sec-properties-of-the-array-prototype-object)。如果Array构造函数和它的所有属性都没有被打上猴子补丁，并且proto没有被指定或者%ArrayPrototype%在[当前领域](https://tc39.es/ecma262/#current-**realm**)中的话，那么将等价于`new Array(length)`。
@@ -685,14 +725,14 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 ***Type ( argument ) [(spec)](https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values)***
 返回 *argument* 的类型。
 
-## § 术语索引
+##  5. <a name='-1'></a>§ 术语索引
 
-### §  由本规范定义的术语
+###  5.1. <a name='-1'></a>§  由本规范定义的术语
 
 
-## § 参考  
+##  6. <a name='-1'></a>§ 参考  
 
-### § 参考文献  
+###  6.1. <a name='-1'></a>§ 参考文献  
 
 [CONSOLE]
 Dominic Farolino; Terin Stock; Robert Kowalski. Console Standard. Living Standard. URL: [https://console.spec.whatwg.org/](https://console.spec.whatwg.org/)
@@ -724,7 +764,7 @@ Randall Munroe. xkcd: Honor Societies. URL: [https://www.xkcd.com/703/](https://
 [YDKJS]
 Kyle Simpson. You Don't Know JS (book series). URL: [https://github.com/getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
 
-## § ISSUS  
+##  7. <a name='ISSUS'></a>§ ISSUS  
 
 >ISSUS 1 待补充 [<https://github.com/TimothyGu/es-howto/issues/2>](<https://github.com/TimothyGu/es-howto/issues/2>)
 
