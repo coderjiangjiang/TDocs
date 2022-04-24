@@ -103,24 +103,24 @@ OK，现在你知道了，规范是非常有用的工具，而且可以帮助你
 ---
 
 *[Object](https://tc39.es/ecma262/#sec-object-objects), [Array](https://tc39.es/ecma262/#sec-array-objects), [Function](https://tc39.es/ecma262/#sec-function-objects), [Number](https://tc39.es/ecma262/#sec-number-objects), [Math](https://tc39.es/ecma262/#sec-math-object), [RegExp](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects),  
-[Proxy](https://tc39.es/ecma262/#sec-proxy-objects), [Map](https://tc39.es/ecma262/#sec-map-objects), [Promise](https://tc39.es/ecma262/#sec-promise-objects), [ArrayBuffer](https://tc39.es/ecma262/#sec-arraybuffer-objects), [Uint8Array](https://tc39.es/ecma262/#sec-typedarray-objects), [globalThis](https://tc39.es/ecma262/#sec-globalthis), ...*&emsp;&emsp;&emsp; &emsp;&emsp;&emsp; ✔  
+[Proxy](https://tc39.es/ecma262/#sec-proxy-objects), [Map](https://tc39.es/ecma262/#sec-map-objects), [Promise](https://tc39.es/ecma262/#sec-promise-objects), [ArrayBuffer](https://tc39.es/ecma262/#sec-arraybuffer-objects), [Uint8Array](https://tc39.es/ecma262/#sec-typedarray-objects), [globalThis](https://tc39.es/ecma262/#sec-globalthis), ...*&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp; ✔  
 
 ---
 
-*console, setTimeout(), setInterval(), clearTimeout(), clearInterval())*&emsp;&emsp;&emsp;✘[2]  
+*console, setTimeout(), setInterval(), clearTimeout(), clearInterval())*&emsp;&emsp;&emsp; &emsp; ✘[2]  
 
 ---
 
-*[Buffer](https://nodejs.org/api/buffer.html#buffer_class_buffer), [process](https://nodejs.org/api/globals.html#globals_process), [global*](https://nodejs.org/api/globals.html#globals_global)*&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp;✘[3]  
+*[Buffer](https://nodejs.org/api/buffer.html#buffer_class_buffer), [process](https://nodejs.org/api/globals.html#globals_process), [global*](https://nodejs.org/api/globals.html#globals_global)*&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp;✘[3]  
 
 ---
 
-*[module](https://nodejs.org/api/modules.html#modules_module), [exports](https://nodejs.org/api/modules.html#modules_exports), [require()](https://nodejs.org/api/modules.html#modules_require), [__dirname](https://nodejs.org/api/modules.html#modules_dirname), [__filename](https://nodejs.org/api/modules.html#modules_filename)*&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; ✘[4]  
+*[module](https://nodejs.org/api/modules.html#modules_module), [exports](https://nodejs.org/api/modules.html#modules_exports), [require()](https://nodejs.org/api/modules.html#modules_require), [__dirname](https://nodejs.org/api/modules.html#modules_dirname), [__filename](https://nodejs.org/api/modules.html#modules_filename)*&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp;&emsp;&emsp;✘[4]  
 
 ---
 
 *[window](https://html.spec.whatwg.org/multipage/window-object.html#dom-window), [alert()](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-alert), [confirm()](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-confirm),  
- the DOM ([document](https://html.spec.whatwg.org/multipage/window-object.html#dom-document-2), [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement), [addEventListener()](https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener), [Worker](https://html.spec.whatwg.org/multipage/workers.html#worker), ...)*&emsp;&emsp;✘[5]  
+ the DOM ([document](https://html.spec.whatwg.org/multipage/window-object.html#dom-document-2), [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement), [addEventListener()](https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener), [Worker](https://html.spec.whatwg.org/multipage/workers.html#worker), ...)*&emsp;&emsp;&emsp;&emsp;✘[5]  
 
 ---
 
