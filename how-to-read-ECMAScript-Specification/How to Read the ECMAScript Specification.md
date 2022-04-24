@@ -13,9 +13,9 @@
 		* [§ 2.3.3. JavaScript对象的内部方法](#2.3.3.JavaScript)
 	* [§ 2.4 `Completion Records` 及特殊符号 `?` 和 `!`](#2.4CompletionRecords)
 	* [§ 2.5. JavaScript Objects](#2.5.JavaScriptObjects)
-	* [§ 2.6. 示例: String.prototype.substring()](#2.6.:String.prototype.substring)
-	* [§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?](#2.7.:BooleanString)
-	* [§ 2.8. 示例: `typeof` 运算符](#2.8.:typeof)
+	* [§ 2.6. 示例: String.prototype.substring()](#2.6.String.prototype.substring)
+	* [§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?](#2.7.BooleanString)
+	* [§ 2.8. 示例: `typeof` 运算符](#2.8.typeof)
 * [§ 术语表](#-1)
 	* [§ 常见的抽象操作](#-1)
 * [§ 术语索引](#-1)
@@ -444,7 +444,7 @@ JavaScript对象也可以通过定义 ***内部槽*** 来包含某些特定类�
 
 ![这是图片](./img/object-uml.svg "Object UML")  
 
-###  3.6. <a name='2.6.:String.prototype.substring'></a>§ 2.6. 示例: String.prototype.substring()  
+###  3.6. <a name='2.6.String.prototype.substring'></a>§ 2.6. 示例: String.prototype.substring()  
 
 现在我们已经比较理解规范是如何组织和编写的了，那接下来让我们来练习一下!  
 假设我现在有一个问题:
@@ -503,7 +503,7 @@ JavaScript对象也可以通过定义 ***内部槽*** 来包含某些特定类�
 >```
 >
 
-###  3.7. <a name='2.7.:BooleanString'></a>§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?  
+###  3.7. <a name='2.7.BooleanString'></a>§ 2.7. 示例: `Boolean()` 与 `String()` 会抛出异常么?  
 
 当在编写任务中重要且关键的代码时，我们通常会将异常处理会放在编码的首要位置。所以，*“我现在用的这个内置函数是不是会抛出异常呢?”* 这样的问题，我们经常会考虑。
 
@@ -644,7 +644,7 @@ OK，让我们把注意力再转向[String()](https://tc39.es/ecma262/#sec-strin
 
 因此，对于String()，我们的结论是：**对于原始值它永远不会抛出异常，但对于Object则可能会抛出错误**。
 
-###  3.8. <a name='2.8.:typeof'></a>§ 2.8. 示例: `typeof` 运算符  
+###  3.8. <a name='2.8.typeof'></a>§ 2.8. 示例: `typeof` 运算符  
 
 到目前为止，我们只分析了API函数，是时候让我们尝试一些不同的东西了！！
 
